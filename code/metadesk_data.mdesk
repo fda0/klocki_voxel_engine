@@ -1,0 +1,81 @@
+@klocki_blocks
+{
+    Stone,
+    Cobblestone,
+    
+    Dirt,
+    Grass: {top, side, bottom: "dirt.png"},
+    Gravel,
+    //Sandstone: {yaxis},
+    Sandstone: {bottom, top},
+    Sand,
+    
+    CoalOre,
+    CoalBlock,
+    IronOre,
+    IronBlock,
+    GoldOre,
+    GoldBlock,
+    DiamondOre,
+    DiamondBlock,
+    EmeraldOre,
+    EmeraldBlock,
+    RedstoneOre,
+    RedstoneBlock,
+    LapisOre,
+    LapisBlock,
+    
+    
+    Brick,
+    StoneBrick,
+    CraftingTable: {north: "crafting_table_front.png", east: "crafting_table_front.png", side top, bottom: "oak_planks.png"},
+    Furnace: {front, yaxis, side},
+    Barrel: {top, bottom, side},
+    Bookshelf: {yaxis: "oak_planks.png"},
+    Tnt: {top, side, bottom},
+    Piston: {top, side, bottom},
+    Sponge,
+    
+    
+    AcaciaLog: {yaxis},
+    AcaciaPlanks,
+    BirchLog: {yaxis},
+    BirchPlanks,
+    DarkOakLog: {yaxis},
+    DarkOakPlanks,
+    JungleLog: {yaxis},
+    JunglePlanks,
+    OakLog: {yaxis},
+    OakPlanks,
+    SpruceLog: {yaxis},
+    SprucePlanks,
+    
+    Pumpkin: {yaxis, side},
+    Melon: {yaxis, side},
+    HayBlock: {yaxis, side},
+    DriedKelp: {top, bottom, side},
+    //HoneyBlock: {top, bottom, side},
+    HoneycombBlock,
+    BeeNest: {front, top, bottom, side},
+    Beehive: {front, yaxis, side},
+    
+    
+    // translucent
+    OakLeaves,
+    Glass,
+    Ice,
+    Honey: {top, bottom, side},
+    Water,
+    
+    
+    TestDirOpaque: {up, down, north, south, east, west},
+    TestDirTranslucent: {up, down, north, south, east, west},
+};
+
+
+
+
+@load_raw_file gl_shader_chunk: "shader_chunk.glsl"
+@load_raw_file gl_shader_ui: "shader_ui.glsl"
+@load_raw_file gl_shader_debug: "shader_debug.glsl"
+@load_raw_file gl_shader_line: "shader_line.glsl"

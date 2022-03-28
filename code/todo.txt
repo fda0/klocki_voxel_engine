@@ -1,0 +1,49 @@
+/*
+[ ] @delete struct Chunk_Handles
+[ ] @delete things with @delete
+[ ] @delete #include "math.h" 
+
+
+[ ] Cleanup pass over multithreading job system dispatching. Right now it is pretty error prone and has too many moving parts.
+    Three ways to solve this:
+    1. Generate the code using metadesk in metaprogramming pre-pass.
+    2. Use C++ templates.
+    3. Build better runtime system for managing this work.
+
+[ ] allow to change draw distance at runtime
+[ ] serialize/deserialize world to disk
+
+[ ] translucent blocks were an afterthought; organize the whole system around transparent blocks more
+
+[ ] @quality Transition to event style input handling where appropriate to avoid missing user button presses
+
+
+[ ] @long_term @quality @world_gen bundle chunk generation vertically
+[ ] ^ proper block assignment once chunks are bundled
+[ ] ^ proper tree placement coordination once chunks are bundled
+[ ] @feature @quality @long_term serialize chunks to disk & compress
+
+
+[ ] @lower_latency? do chunk refresh work on main thread if there is only 1 chunk?
+[ ] at least do gpu upload on main cpu? its cheap and it would lower latency
+[ ] have some heuristics for singlethreaded immediate work vs multithreaded work?
+
+
+[ ] @quality @lower_latency avoid queueing too much work into to_generate at once. Having limits would lower memory usage, lower latency and would allow the game to always work on chunks the closest to the player.
+[ ] ^ measure average work of X type done per frame and do not append queue if there is already 2x the average on a worker
+[ ] delete to_generate_sentinel? not needed
+
+
+
+[ ] @perfomance add simd to render_chunk
+[ ] @technology look up uniform buffer objects for face array?
+
+[ ] @quality @perfomance gl_buffer sync -- skip re-render instead of waiting
+[ ] @quality handle case where we run out of vram and try again later when hopefully some vram was freed
+
+[ ] @long_term more optimized world storage in ram?
+[ ] @optimization_idea save RAM by freeing block memory of chunks that are far away - after meshing them
+
+
+[ ] @note Ambient occlusion has a glitch where it doesn't give the same results on all axis. This is due to vertex interpolation in shader being done on triangles - not quads. But even minecraft has this glitch so I decided to live with it for now.
+*/
