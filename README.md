@@ -2,7 +2,7 @@
 
 Engine designed around lock-free, low overhead multithreading.  
 Supports translucent blocks, ambient occlusion, infinite world in all axis, collision system, mesh optimization and lazy chunk updating.  
-GPU data format optimized to 4 bytes per triangle ( inspired by https://github.com/nothings/stb/blob/master/stb_voxel_render.h ).  
+GPU data format optimized to 4 bytes per triangle (inspired by [stb_voxel_render.h](https://github.com/nothings/stb/blob/master/stb_voxel_render.h)).  
 Short showcase video: https://youtu.be/km2zESxC4ls
 
 Code is a little bit messy as it is still in development and most of the codebase is in experimentation phase.  
@@ -21,6 +21,7 @@ Space - jump
 Left mouse - destroy block  
 Right mouse - place block  
 Mouse scroll - change block in hand  
+First additional mouse button - destroy/place blocks rapidly  
 Second additional mouse button - unlock mouse from the window  
 
 F1 - reset player speed  
