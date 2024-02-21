@@ -6,22 +6,22 @@
 #define Bitmask_6 0x0000003fu
 #define Bitmask_7 0x0000007fu
 #define Bitmask_8 0x000000ffu
-#define Bitmask_9 0x000001ff
-#define Bitmask_10 0x000003ff
-#define Bitmask_11 0x000007ff
-#define Bitmask_12 0x00000fff
-#define Bitmask_13 0x00001fff
-#define Bitmask_14 0x00003fff
-#define Bitmask_15 0x00007fff
-#define Bitmask_16 0x0000ffff
-#define Bit_1  0x00000001
-#define Bit_2  0x00000002
-#define Bit_3  0x00000004
-#define Bit_4  0x00000008
-#define Bit_5  0x00000010
-#define Bit_6  0x00000020
-#define Bit_7  0x00000040
-#define Bit_8  0x00000080
+#define Bitmask_9 0x000001ffu
+#define Bitmask_10 0x000003ffu
+#define Bitmask_11 0x000007ffu
+#define Bitmask_12 0x00000fffu
+#define Bitmask_13 0x00001fffu
+#define Bitmask_14 0x00003fffu
+#define Bitmask_15 0x00007fffu
+#define Bitmask_16 0x0000ffffu
+#define Bit_1  0x00000001u
+#define Bit_2  0x00000002u
+#define Bit_3  0x00000004u
+#define Bit_4  0x00000008u
+#define Bit_5  0x00000010u
+#define Bit_6  0x00000020u
+#define Bit_7  0x00000040u
+#define Bit_8  0x00000080u
 
 
 #if defined(VERTEX_SHADER)
@@ -42,26 +42,26 @@ void main()
     uvec4 face_data = texelFetch(uni_face_array, face_index);
     
     
-    uint packed_pos = (face_data.y << 8 | face_data.x);
+    uint packed_pos = (face_data.y << 8u | face_data.x);
     vec3 pos;
-    pos.x = float((packed_pos.x    ) & Bitmask_5);
-    pos.y = float((packed_pos >>  5) & Bitmask_5);
-    pos.z = float((packed_pos >> 10) & Bitmask_5);
+    pos.x = float((packed_pos       ) & Bitmask_5);
+    pos.y = float((packed_pos >>  5u) & Bitmask_5);
+    pos.z = float((packed_pos >> 10u) & Bitmask_5);
     
     vec3 pos_offset;
-    pos_offset.x = float((v_packed     ) & 1);
-    pos_offset.y = float((v_packed >> 1) & 1);
-    pos_offset.z = float((v_packed >> 2) & 1);
+    pos_offset.x = float((v_packed     ) & 1u);
+    pos_offset.y = float((v_packed >> 1u) & 1u);
+    pos_offset.z = float((v_packed >> 2u) & 1u);
     pos += pos_offset;
     
-    f_ambient = 1.0 - ((float((v_packed >> 3) & Bitmask_2) / (3.0)) * 0.53);
+    f_ambient = 1.0 - ((float((v_packed >> 3u) & Bitmask_2) / (3.0)) * 0.53);
     
     f_voxel_p = pos + uni_mesh_translate;
     gl_Position = vec4(f_voxel_p, 1.f) * uni_world_transform;
     
-    f_face_data = ((face_data.w << 9) |
-                   (face_data.z << 1) |
-                   (face_data.y >> 7));
+    f_face_data = ((face_data.w << 9u) |
+                   (face_data.z << 1u) |
+                   (face_data.y >> 7u));
 }
 
 
@@ -79,34 +79,34 @@ uniform float uni_mesh_age_t;
 out vec4 out_color;
 
 
-const vec3 tex_perpendiculars[12] =
-{
+const vec3 tex_perpendiculars[12] = vec3[12]
+(
     // x axis (S)
-    {-1, 0, 0}, // up
-    {-1, 0, 0}, // down
-    { 1, 0, 0}, // N
-    {-1, 0, 0}, // S
-    { 0, 0,-1}, // E
-    { 0, 0, 1}, // W
+    vec3(-1, 0, 0), // up
+    vec3(-1, 0, 0), // down
+    vec3( 1, 0, 0), // N
+    vec3(-1, 0, 0), // S
+    vec3( 0, 0,-1), // E
+    vec3( 0, 0, 1), // W
     
     // y axis (T)
-    { 0, 0, 1}, // up
-    { 0, 0,-1}, // down
-    { 0, 1, 0}, // N
-    { 0, 1, 0}, // S
-    { 0, 1, 0}, // E
-    { 0, 1, 0}, // W
-};
+    vec3( 0, 0, 1), // up
+    vec3( 0, 0,-1), // down
+    vec3( 0, 1, 0), // N
+    vec3( 0, 1, 0), // S
+    vec3( 0, 1, 0), // E
+    vec3( 0, 1, 0) // W
+);
 
-const float face_colors[6] =
-{
+const float face_colors[6] = float[6]
+(
     1.f,   // up
     0.71f, // down
     0.81f, // N
     0.81f, // S
     0.91f, // E
-    0.91f, // W
-};
+    0.91f // W
+);
 
 
 //const vec3 fog_color = vec3(0.53, 0.1, 0.1); // test red
@@ -123,9 +123,9 @@ vec3 compute_fog(vec3 color, vec3 rel_p)
 
 void main()
 {
-    uint normal_index = ((f_face_data >> 14) & Bitmask_3);
+    uint normal_index = ((f_face_data >> 14u) & Bitmask_3);
     vec3 texgen_s = tex_perpendiculars[normal_index];
-    vec3 texgen_t = tex_perpendiculars[normal_index + 6];
+    vec3 texgen_t = tex_perpendiculars[normal_index + 6u];
     
     vec2 tex_coord;
     tex_coord.s = dot(f_voxel_p, texgen_s);

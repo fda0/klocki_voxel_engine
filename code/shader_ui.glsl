@@ -1,4 +1,4 @@
-#define Bitmask_14 0x00003fff
+#define Bitmask_14 0x00003fffu
 
 #if defined(VERTEX_SHADER)
 
@@ -17,11 +17,11 @@ void main()
     gl_Position = vec4(vert_pos, 1.f) * uni_transform;
     frag_tex_uv = vert_tex_uv;
     
-    vec3 light = vec3(float((vert_packed & 0xF00) >> 8),
-                      float((vert_packed & 0x0F0) >> 4),
-                      float((vert_packed & 0x00F)      )) / 15.0;
+    vec3 light = vec3(float((vert_packed & 0xF00u) >> 8u),
+                      float((vert_packed & 0x0F0u) >> 4u),
+                      float((vert_packed & 0x00Fu)      )) / 15.0;
     
-    frag_texid = (vert_packed >> 12) & Bitmask_14;
+    frag_texid = (vert_packed >> 12u) & Bitmask_14;
     frag_color = vec4(light, 1.0);
 }
 
